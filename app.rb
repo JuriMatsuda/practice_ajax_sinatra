@@ -10,6 +10,7 @@ ActiveRecord::Base.establish_connection(
 class App < Sinatra::Base
 
   get '/' do
+    @comments = Comment.order('id desc')
     slim :index
   end
 
