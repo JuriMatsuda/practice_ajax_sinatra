@@ -1,5 +1,11 @@
 require "sinatra"
 require "sinatra/reloader"
+require "active_record"
+
+ActiveRecord::Base.establish_connection(
+    "adapter" => "sqlite3",
+    "database" => "./db/bbs.db"
+)
 
 class App < Sinatra::Base
 
@@ -14,4 +20,8 @@ class App < Sinatra::Base
     data.to_json
   end
 
+end
+
+after do
+  ActiveRecord::Base.connection.close
 end
